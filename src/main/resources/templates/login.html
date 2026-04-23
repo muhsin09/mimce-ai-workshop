@@ -95,6 +95,17 @@
             color: var(--success);
             border: 1px solid #BEE1CC;
         }
+        .footer {
+            margin-top: 14px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -104,6 +115,10 @@
 
     <div class="message success" th:if="${param.logout}" role="status">
         You have been signed out.
+    </div>
+
+    <div class="message success" th:if="${successMessage}" role="status" th:text="${successMessage}">
+        Account created.
     </div>
 
     <form th:action="@{/login}" method="post">
@@ -119,6 +134,11 @@
     <div class="message error" th:if="${param.error}" role="alert">
         Invalid username or password.
     </div>
+
+    <p class="footer">
+        No account yet?
+        <a th:href="@{/register}">Create one</a>
+    </p>
 </div>
 </body>
 </html>
