@@ -9,6 +9,7 @@ Kullanıcı giriş yaptıktan sonra dashboard'da TODO ekleyebilir, tamamlayabili
 - Thymeleaf (server-side rendering)
 - Spring Security (in-memory auth, kullanıcı: mimce/mimce)
 - In-memory storage (ConcurrentHashMap, veritabanı yok)
+- JUnit 5 + AssertJ (test)
 
 ## Commands
 ```
@@ -29,6 +30,11 @@ src/main/java/com/mimce/workshop/
     TodoController.java       → POST /todos, DELETE /todos/{id}, POST /todos/{id}/toggle
 src/main/resources/templates/
   dashboard.html       → güncellenir (TODO form + liste)
+src/test/java/com/mimce/workshop/
+  service/
+    TodoServiceTest.java       → 14 unit test
+  controller/
+    TodoControllerTest.java    → 4 entegrasyon testi
 ```
 
 ## Code Style
@@ -45,8 +51,10 @@ public class TodoService {
 ```
 
 ## Testing Strategy
-- `./mvnw test` ile mevcut application context testi geçmeli
-- Manuel: giriş yap → todo ekle → tamamla → sil
+- JUnit 5 + AssertJ
+- TodoServiceTest: 14 unit test (CRUD, kullanıcı izolasyonu, edge case'ler)
+- TodoControllerTest: 4 entegrasyon testi (MockMvc + Spring Security)
+- Toplam: 19 test
 
 ## Boundaries
 - Always: Redirect-after-post, Thymeleaf CSRF token, kullanıcı izolasyonu
@@ -54,9 +62,9 @@ public class TodoService {
 - Never: Başka kullanıcının TODO'sunu gösterme/silme
 
 ## Success Criteria
-- [ ] Giriş yapmış kullanıcı TODO ekleyebilir
-- [ ] TODO listesi kullanıcıya özel görünür
-- [ ] TODO tamamlandı/tamamlanmadı toggle çalışır
-- [ ] TODO silinebilir
-- [ ] UI mevcut tasarıma uygun
-- [ ] Build hatasız geçer
+- [x] Giriş yapmış kullanıcı TODO ekleyebilir
+- [x] TODO listesi kullanıcıya özel görünür
+- [x] TODO tamamlandı/tamamlanmadı toggle çalışır
+- [x] TODO silinebilir
+- [x] UI mevcut tasarıma uygun (Türkçe)
+- [x] Build hatasız geçer (19 test başarılı)
