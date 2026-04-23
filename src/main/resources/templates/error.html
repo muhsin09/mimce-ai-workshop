@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Something went wrong &middot; Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #F5F6FA;
+            color: #011624;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .card {
+            background: #fff;
+            max-width: 480px;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(1, 22, 36, 0.08);
+            text-align: center;
+        }
+        h1 { margin: 0 0 8px 0; font-size: 22px; }
+        p { color: #67737C; margin: 4px 0; }
+        a { color: #5D5DFD; text-decoration: none; font-weight: 600; }
+        a:hover { text-decoration: underline; }
+        .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Something went wrong</h1>
+    <p>We hit an unexpected error handling your request.</p>
+    <p class="code" th:if="${status}">Status: <span th:text="${status}">500</span></p>
+    <p><a th:href="@{/}">Go back home</a></p>
+</div>
+</body>
+</html>

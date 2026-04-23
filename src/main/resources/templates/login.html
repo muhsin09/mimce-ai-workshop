@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sign in &middot; Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style>
+        :root {
+            --primary: #5D5DFD;
+            --dark: #011624;
+            --muted: #67737C;
+            --bg: #F5F6FA;
+            --error: #B3261E;
+            --success: #146C43;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .card {
+            background: #fff;
+            width: 100%;
+            max-width: 380px;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(1, 22, 36, 0.08);
+        }
+        h1 {
+            margin: 0 0 4px 0;
+            font-size: 22px;
+            color: var(--dark);
+        }
+        .subtitle {
+            margin: 0 0 24px 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--dark);
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 15px;
+            border: 1px solid #D5D9E1;
+            border-radius: 8px;
+            background: #fff;
+            color: var(--dark);
+            margin-bottom: 16px;
+            outline: none;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(93, 93, 253, 0.15);
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 11px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover { background: #4747E6; }
+        .message {
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin: 12px 0;
+        }
+        .message.error {
+            background: #FDECEA;
+            color: var(--error);
+            border: 1px solid #F3C7C2;
+        }
+        .message.success {
+            background: #E6F4EC;
+            color: var(--success);
+            border: 1px solid #BEE1CC;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Sign in</h1>
+    <p class="subtitle">Mimce AI Workshop Demo</p>
+
+    <div class="message success" th:if="${param.logout}" role="status">
+        You have been signed out.
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" autocomplete="username" autofocus required/>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required/>
+
+        <button type="submit">Sign in</button>
+    </form>
+
+    <div class="message error" th:if="${param.error}" role="alert">
+        Invalid username or password.
+    </div>
+</div>
+</body>
+</html>
