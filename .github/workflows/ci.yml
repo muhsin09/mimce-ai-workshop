@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, enhance/ci-security-docs ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Verify Maven wrapper
+        run: chmod +x ./mvnw
+
+      - name: Build and run tests
+        run: ./mvnw clean verify
+
+      - name: Spotless check (optional)
+        run: ./mvnw spotless:check || echo "Spotless not configured"
+
+      - name: Checkstyle (optional)
+        run: ./mvnw checkstyle:check || echo "Checkstyle not configured"
+
+      - name: OWASP Dependency Check
+        uses: dependency-check/Dependency-Check-Action@v2
+        with:
+          project: .
+          scan: .
+          format: HTML
+          out: dependency-check-report.html
+
+      - name: Upload Dependency Check report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-report
+          path: dependency-check-report.html

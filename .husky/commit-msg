@@ -1,0 +1,14 @@
+#!/bin/sh
+# Simple commit-msg hook enforcing Conventional Commit style
+# Expected: <type>(optional-scope): <description>
+# Types allowed: feat, fix, docs, style, refactor, perf, test, chore, build, ci
+
+_commit_msg="$1"
+
+if grep -iqE "^(feat|fix|docs|style|refactor|perf|test|chore|build|ci)(\([^)]*\))?: .+" "$_commit_msg"; then
+  exit 0
+else
+  echo "\nCommit message does not follow Conventional Commit format."
+  echo "Example: feat(login): add login page"
+  exit 1
+fi

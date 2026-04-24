@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
+/**
+ * Handles CRUD actions for {@link com.mimce.workshop.model.Todo} via web forms.
+ */
 @Controller
 @RequestMapping("/todos")
 @Validated

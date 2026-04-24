@@ -3,10 +3,13 @@ package com.mimce.workshop;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Entry point for the Mimce Workshop Spring Boot application.
+ */
 @SpringBootApplication
 public class MimceWorkshopApplication {
 
-	public static void main(String[] args) {
+	static void main(String[] args) {
 		SpringApplication.run(MimceWorkshopApplication.class, args);
 	}
 

@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
 
+/**
+ * Renders the dashboard view showing the user's todo list.
+ */
 @Controller
 public class DashboardController {
 

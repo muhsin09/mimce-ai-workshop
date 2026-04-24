@@ -9,7 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Spring Security configuration for the workshop application.
+ * Uses in‑memory authentication with BCrypt password encoding.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -37,10 +43,15 @@ public class SecurityConfig {
     }
 
     @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
     public UserDetailsService userDetailsService() {
         UserDetails admin = User.builder()
             .username("mimce")
-            .password("{noop}mimce")
+            .password(passwordEncoder().encode("mimce"))
             .roles("USER")
             .build();
         return new InMemoryUserDetailsManager(admin);
